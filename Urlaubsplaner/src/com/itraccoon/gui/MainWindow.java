@@ -15,7 +15,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import com.itraccoon.constants.Constants;
-import com.itraccoon.filehandling.SaveUserlist;
+import com.itraccoon.filehandling.ExportUserlist;
 import com.itraccoon.gui.dialogue.ClosingDialogue;
 import com.itraccoon.main.Runtime;
 import com.itraccoon.object.User;
@@ -180,7 +180,7 @@ public class MainWindow {
     }
     
     void saveUserlist() {
-        new SaveUserlist();
+        new ExportUserlist();
     }
     
     void reloadTable(DefaultTableModel model) {

@@ -94,7 +94,7 @@ public class SimpleApp {
      *            is to use the embedded JDBC driver.
      */
     public static void main(String[] args) {
-        System.setProperty("derby.system.home", Constants.USERFILES);
+        System.setProperty("derby.system.home", Constants.DATABASE_LOCATION);
         new SimpleApp().go(args);
         System.out.println("SimpleApp finished");
         System.out.println(System.getProperty("derby.system.home"));

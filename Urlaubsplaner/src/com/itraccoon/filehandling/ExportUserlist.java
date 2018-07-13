@@ -11,9 +11,9 @@ import com.itraccoon.gui.dialogue.MessageDialogue;
 import com.itraccoon.main.Runtime;
 import com.itraccoon.object.Users;
 
-public class SaveUserlist {
+public class ExportUserlist {
     
-    public SaveUserlist() {
+    public ExportUserlist() {
         try {
             save();
         }
@@ -30,7 +30,7 @@ public class SaveUserlist {
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
         
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        jaxbMarshaller.marshal(users, new File(Constants.USERVERZEICHNIS));
+        jaxbMarshaller.marshal(users, new File(Constants.EXPORT_LOCATION));
         
         new MessageDialogue("Daten erfolgreich gesichert", "Saved");
     }

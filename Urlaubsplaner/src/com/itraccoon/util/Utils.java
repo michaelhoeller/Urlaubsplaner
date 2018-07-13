@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.itraccoon.constants.Constants;
-import com.itraccoon.filehandling.SaveUserlist;
+import com.itraccoon.filehandling.ExportUserlist;
 import com.itraccoon.gui.dialogue.MessageDialogue;
 import com.itraccoon.main.Runtime;
 import com.itraccoon.object.Holiday;
@@ -32,7 +32,7 @@ public class Utils {
     // System exit
     public static void SystemExit() {
         if (Runtime.getInstance().isDataThere()) {
-            new SaveUserlist();
+            new ExportUserlist();
         }
         else {
             new MessageDialogue("No data to save.", "Warning");
@@ -100,6 +100,7 @@ public class Utils {
         return (int) (Constants.SCREENHEIGHT / 2);
     }
     
+    // Todo: move to Database
     public static User findUserById(Integer id) {
         List<User> userList = Runtime.getInstance().getUserlist();
         for (User user : userList) {

@@ -3,7 +3,7 @@ package com.itraccoon.main;
 import java.io.File;
 
 import com.itraccoon.constants.Constants;
-import com.itraccoon.filehandling.LoadUserlist;
+import com.itraccoon.filehandling.ImportUserlist;
 import com.itraccoon.gui.dialogue.MessageDialogue;
 import com.itraccoon.util.Utils;
 
@@ -38,7 +38,7 @@ public class SystemBoot {
     
     private void checkForData() {
         // If no File exists. Set id to 1 and wait for creation.
-        if (!new File(Constants.USERVERZEICHNIS).exists()) {
+        if (!new File(Constants.EXPORT_LOCATION).exists()) {
             new MessageDialogue("Bitte Benutzer anlegen", "Keine Nutzer gefunden");
             Runtime.getInstance().setNextUserId(1);
         }
@@ -49,6 +49,6 @@ public class SystemBoot {
     }
     
     private void loadUserList() {
-        new LoadUserlist();
+        new ImportUserlist();
     }
 }

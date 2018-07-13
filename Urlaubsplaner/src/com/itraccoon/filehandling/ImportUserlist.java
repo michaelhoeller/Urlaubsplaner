@@ -10,9 +10,9 @@ import com.itraccoon.constants.Constants;
 import com.itraccoon.main.Runtime;
 import com.itraccoon.object.Users;
 
-public class LoadUserlist {
+public class ImportUserlist {
     
-    public LoadUserlist() {
+    public ImportUserlist() {
         try {
             load();
         }
@@ -25,7 +25,7 @@ public class LoadUserlist {
         JAXBContext jaxbContext = JAXBContext.newInstance(Users.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         
-        Users users = (Users) jaxbUnmarshaller.unmarshal(new File(Constants.USERVERZEICHNIS));
+        Users users = (Users) jaxbUnmarshaller.unmarshal(new File(Constants.EXPORT_LOCATION));
         
         Runtime.getInstance().setUserlist(users.getUserList());
     }
