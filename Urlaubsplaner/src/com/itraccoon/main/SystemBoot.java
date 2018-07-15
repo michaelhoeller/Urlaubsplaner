@@ -1,19 +1,27 @@
 package com.itraccoon.main;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
 
 import com.itraccoon.constants.Constants;
 import com.itraccoon.gui.dialogue.MessageDialogue;
 import com.itraccoon.util.Utils;
 
 public class SystemBoot {
+	List<String> messeges = new ArrayList<String>();
+
+	Logger logger = Logger.getLogger(SystemBoot.class);
 
 	private static SystemBoot instance;
 
 	private SystemBoot() {
+		logger.info("Preparing SystemBoot");
+		checkFileStruckture();
 		initializeSysProps();
-		// checkFileStruckture();
-		// checkForData();
+		checkForData();
 		// checkNewYear();
 	}
 
@@ -26,17 +34,16 @@ public class SystemBoot {
 
 	private void initializeSysProps() {
 		System.setProperty("logfileLocation", Constants.LOGFILE_LOCATION);
+		System.setProperty(Constants.DATABASE_HOME, Constants.DATABASE_LOCATION);
 
 	}
 
 	private void checkFileStruckture() {
 		// Check for Folders. Create it if it doesn't exist
 		if (!new File(Constants.MAINFOLDER).exists()) {
-			new MessageDialogue(
-					"Application Folder wurde unter " + Constants.SYS_USERHOME
-							+ " angelegt.\nUm Datenverlust zu vermeiden: Finger weg!",
-					"Programverzeichnis nicht gefunden.");
 			new File(Constants.MAINFOLDER).mkdirs();
+			logger.info("No system folder found. Creation successful");
+			messeges.add("No system folder found. Creation successful");
 		}
 	}
 
