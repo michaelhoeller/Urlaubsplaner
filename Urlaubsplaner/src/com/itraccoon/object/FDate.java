@@ -1,5 +1,6 @@
 package com.itraccoon.object;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,6 +13,13 @@ public class FDate {
     private String dateAsString;
     
     public FDate(Date date) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat(Constants.DATEFORMAT);
+        this.dateAsString = sdf.format(date);
+        this.date = sdf.parse(dateAsString);
+    }
+    
+    public FDate(Timestamp ts) throws ParseException {
+        Date date = new Date(ts.getTime());
         SimpleDateFormat sdf = new SimpleDateFormat(Constants.DATEFORMAT);
         this.dateAsString = sdf.format(date);
         this.date = sdf.parse(dateAsString);

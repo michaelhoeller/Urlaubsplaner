@@ -35,12 +35,22 @@ public class ConnectionManager {
         Connection connection = null;
         
         try {
-            connection = DriverManager.getConnection(Constants.DATABANK_URL + ";create=false");
+            connection = DriverManager.getConnection(Constants.DATABANK_URL); // + ";create=false"
             connection.setAutoCommit(false);
         }
         catch (SQLException e) {
             logger.error("SQLException was thrown during connection to databank", e);
         }
+        
+        return connection;
+    }
+    
+    public Connection getShutdownConnection() throws SQLException {
+        if (connection != null) {
+            return connection;
+        }
+        
+        Connection connection = DriverManager.getConnection(Constants.DATABANK_URL + ";shutdown=true");
         
         return connection;
     }

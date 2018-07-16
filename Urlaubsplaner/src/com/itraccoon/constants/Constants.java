@@ -12,8 +12,8 @@ public class Constants {
     public static String   DATABASE_HOME     = System.getProperty("derby.system.home");
     
     // Toolkit
-    public static Double   SCREENWIDTH       = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-    public static Double   SCREENHEIGHT      = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+    public static Integer  SCREENWIDTH       = ((Double) Toolkit.getDefaultToolkit().getScreenSize().getWidth()).intValue();
+    public static Integer  SCREENHEIGHT      = ((Double) Toolkit.getDefaultToolkit().getScreenSize().getHeight()).intValue();
     
     // Database locations
     /**

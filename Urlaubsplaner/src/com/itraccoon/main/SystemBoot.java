@@ -3,11 +3,14 @@ package com.itraccoon.main;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import org.apache.log4j.Logger;
 
@@ -28,7 +31,7 @@ public class SystemBoot {
     private static SystemBoot instance;
     
     private SystemBoot() {
-        // logger.info("Preparing SystemBoot");
+        logger.info("Preparing SystemBoot");
         checkFileStruckture();
         checkForDatabank();
         if (!databaseExists) {
@@ -39,6 +42,8 @@ public class SystemBoot {
         }
         
         stateLastLogin();
+        
+        setLookAndFeel();
         // Last action
         systemBootComplete = true;
         logger.info("SystemBoot completed successfully");
@@ -81,15 +86,13 @@ public class SystemBoot {
     @SuppressWarnings("unused")
     private void checkNewYear() {
         // TODO Auto-generated method stub
-        if (databaseExists) {
-            // Check Last Login
-            Date date = new Date();
-            
-            // 31.12 is between last login and date
-            if (1 == 2) {
-                // Give every user respective holidays
-                logger.info("New days have been allocated to all users");
-            }
+        // Check Last Login
+        Date date = new Date();
+        
+        // 31.12 is between last login and date
+        if (1 == 2) {
+            // Give every user respective holidays
+            logger.info("New days have been allocated to all users");
         }
     }
     
@@ -111,22 +114,44 @@ public class SystemBoot {
             }
             
         }
+        logger.info("checkDBExistence() returned " + flag);
         return flag;
     }
     
     private void stateLastLogin() {
         Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement stmt = null;
         try {
-            Statement stmt = conn.createStatement();
-            stmt.execute(SystemDevice.getInsertLogin());
+            stmt = conn.prepareStatement(SystemDevice.getInsertLogin());
+            stmt.execute();
             conn.commit();
         }
         catch (SQLException e) {
             logger.fatal("Couldn't insert login date", e);
         }
         finally {
-            ConnectionManager.close(null, null, conn);
+            ConnectionManager.close(null, stmt, conn);
         }
+    }
+    
+    private void setLookAndFeel() {
+        logger.info("Setting up look and feel.");
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
+        catch (ClassNotFoundException e) {
+            logger.warn("Look and feel yesn't be set", e);
+        }
+        catch (InstantiationException e) {
+            logger.warn("Look and feel yesn't be set", e);
+        }
+        catch (IllegalAccessException e) {
+            logger.warn("Look and feel yesn't be set", e);
+        }
+        catch (UnsupportedLookAndFeelException e) {
+            logger.warn("Look and feel yesn't be set", e);
+        }
+        logger.info("Look and feel set successfully.");
     }
     
     public boolean isDatabaseExists() {

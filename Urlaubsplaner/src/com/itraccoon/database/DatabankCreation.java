@@ -32,14 +32,10 @@ public class DatabankCreation {
         
         Statement stmt = conn.createStatement();
         stmt.execute(CreationDevice.getCreateUserTable());
-        ConnectionManager.close(null, stmt, null);
-        
-        stmt = conn.createStatement();
         stmt.execute(CreationDevice.getCreateHolidayTable());
-        ConnectionManager.close(null, stmt, null);
-        
-        stmt = conn.createStatement();
         stmt.execute(CreationDevice.getCreateSystemTable());
+        
+        conn.commit();
         ConnectionManager.close(null, stmt, conn);
     }
 }

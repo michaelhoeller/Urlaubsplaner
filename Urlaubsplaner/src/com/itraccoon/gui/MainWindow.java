@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -20,6 +19,8 @@ import com.itraccoon.gui.dialogue.ClosingDialogue;
 import com.itraccoon.main.Runtime;
 import com.itraccoon.object.User;
 import com.itraccoon.util.Utils;
+import com.itraccoon.util.WindowUtils;
+import com.itraccoon.util.frameSize;
 
 public class MainWindow {
     
@@ -43,39 +44,17 @@ public class MainWindow {
     private JTable            userTable;
     private DefaultTableModel model;
     
-    private MainWindow        mainWindowHolder;
-    
     public MainWindow() {
-        this.setMainWindowHolder(this);
         initialize();
         frame.setVisible(true);
     }
     
     private void initialize() {
         frame = new JFrame();
-        frame.setSize(Utils.getHalfWidth(), Utils.getHalfHeight());
-        frame.setTitle("Urlaubsplaner - Übersicht");
-        frame.getContentPane().setLayout(null);
+        WindowUtils.setWindowProperties(frame, "Urlaubsplaner - Übersicht", frameSize.FULL_SCREEN.size(), true);
+        
         frame.getContentPane().add(getScrollPane());
-        frame.setLocationRelativeTo(null);
         frame.setJMenuBar(getMenuBar());
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.addWindowListener(new WindowAdapter() {
-            
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                if (new ClosingDialogue().getAnswer() == true) {
-                    Utils.SystemExit();
-                }
-            }
-        });
-    }
-    
-    public MainWindow getMainWindowHolder() {
-        return mainWindowHolder;
-    }
-    
-    public void setMainWindowHolder(MainWindow mainWindowHolder) {
-        this.mainWindowHolder = mainWindowHolder;
     }
     
     private JMenuBar getMenuBar() {
@@ -131,7 +110,7 @@ public class MainWindow {
         
         public void actionPerformed(ActionEvent e) {
             if (new ClosingDialogue().getAnswer() == true) {
-                Utils.SystemExit();
+                // TODO
             }
         }
     }

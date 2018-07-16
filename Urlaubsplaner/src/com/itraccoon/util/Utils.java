@@ -11,8 +11,6 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
-import com.itraccoon.constants.Constants;
-import com.itraccoon.filehandling.ExportUserlist;
 import com.itraccoon.gui.dialogue.MessageDialogue;
 import com.itraccoon.main.Runtime;
 import com.itraccoon.object.Holiday;
@@ -27,17 +25,6 @@ public class Utils {
     
     public static void setClipboard(String contents) {
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(contents), new StringSelection(contents));
-    }
-    
-    // System exit
-    public static void SystemExit() {
-        if (Runtime.getInstance().isDataThere()) {
-            new ExportUserlist();
-        }
-        else {
-            new MessageDialogue("No data to save.", "Warning");
-        }
-        System.exit(0);
     }
     
     // Id
@@ -81,23 +68,6 @@ public class Utils {
         long diffDays = diff / (24 * 60 * 60 * 1000) + 1;
         length = (int) diffDays;
         return length;
-    }
-    
-    // Window size
-    public static Integer getQuarterWidth() {
-        return (int) (Constants.SCREENWIDTH / 4);
-    }
-    
-    public static Integer getHalfWidth() {
-        return (int) (Constants.SCREENWIDTH / 2);
-    }
-    
-    public static Integer getQuarterHeight() {
-        return (int) (Constants.SCREENWIDTH / 4);
-    }
-    
-    public static Integer getHalfHeight() {
-        return (int) (Constants.SCREENHEIGHT / 2);
     }
     
     // Todo: move to Database

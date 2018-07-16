@@ -28,7 +28,7 @@ public class CreationDevice {
     public static String getCreateSystemTable() {
         String statement = "CREATE TABLE SYSTEMPREFERENCES("
             + "SYST_ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-            + "SYST_LAST_LOGIN DATE NOT NULL,"
+            + "SYST_LAST_LOGIN TIMESTAMP NOT NULL,"
             + "PRIMARY KEY(SYST_ID))";
         return statement;
     }
