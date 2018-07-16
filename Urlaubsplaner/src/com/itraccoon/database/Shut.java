@@ -36,6 +36,7 @@ public class Shut {
         }
         
         logger.info("Shutdown complete");
+        logger.info("------------------------------------------------------------------------------------");
         System.exit(0);
     }
 }

@@ -44,7 +44,10 @@ public class MainWindow {
     private JTable            userTable;
     private DefaultTableModel model;
     
+    private MainWindow        mainWindowHolder;
+    
     public MainWindow() {
+        this.setMainWindowHolder(this);
         initialize();
         frame.setVisible(true);
     }
@@ -55,6 +58,14 @@ public class MainWindow {
         
         frame.getContentPane().add(getScrollPane());
         frame.setJMenuBar(getMenuBar());
+    }
+    
+    public MainWindow getMainWindowHolder() {
+        return mainWindowHolder;
+    }
+    
+    public void setMainWindowHolder(MainWindow mainWindowHolder) {
+        this.mainWindowHolder = mainWindowHolder;
     }
     
     private JMenuBar getMenuBar() {
