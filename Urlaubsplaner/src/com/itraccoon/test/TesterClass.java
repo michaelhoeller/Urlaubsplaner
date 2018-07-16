@@ -12,26 +12,27 @@ import com.itraccoon.database.ConnectionManager;
 import com.itraccoon.object.FDate;
 
 public class TesterClass {
-    
-    Logger logger = Logger.getLogger(TesterClass.class);
-    
-    public static void printAllLogins() throws ParseException {
-        Connection conn = ConnectionManager.getInstance().getConnection();
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("Select * from SYSTEMPREFERENCES");
-            
-            System.out.println("Begin Test");
-            while (rs.next()) {
-                System.out.println(rs.getInt("Syst_id"));
-                System.out.println(rs.getTimestamp("SYST_LAST_LOGIN"));
-                FDate date = new FDate(rs.getTimestamp(2));
-                System.out.println("datetest: " + date.getDateAsString());
-            }
-            System.out.println("End Test");
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+
+	static final Logger logger = Logger.getLogger(TesterClass.class);
+
+	public static void printAllLogins() throws ParseException {
+		Connection conn = ConnectionManager.getInstance().getConnection();
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("Select * from SYSTEMPREFERENCES");
+
+			logger.info("---------------------------------------------");
+			logger.info("Begin Test");
+			while (rs.next()) {
+				logger.info("Eintrag with id: " + rs.getInt("Syst_id"));
+				logger.info("Respective timestamp: " + rs.getTimestamp("SYST_LAST_LOGIN"));
+				logger.info("Conversion to String test: " + new FDate(rs.getTimestamp(2)).getDateAsString());
+				logger.info("------------------");
+			}
+			logger.info("End Test");
+			logger.info("---------------------------------------------");
+		} catch (SQLException e) {
+			logger.error("Error during TesterClass.", e);
+		}
+	}
 }
