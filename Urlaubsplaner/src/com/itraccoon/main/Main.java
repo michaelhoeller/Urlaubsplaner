@@ -1,27 +1,43 @@
 package com.itraccoon.main;
 
-import java.text.ParseException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-import javax.swing.JFrame;
-import javax.xml.bind.JAXBException;
+import org.apache.log4j.Logger;
 
-import com.itraccoon.gui.MainWindow;
-import com.itraccoon.object.Holiday;
-import com.itraccoon.object.User;
+import com.itraccoon.constants.Constants;
+import com.itraccoon.database.ConnectionManager;
 
 public class Main {
     
-    public static void main(String[] args) throws JAXBException, ParseException {
-        JFrame.setDefaultLookAndFeelDecorated(true);
+    static Logger logger;
+    
+    public static void main(String[] args) {
+        System.setProperty("logfileLocation", Constants.LOGFILE_LOCATION);
+        System.setProperty("derby.system.home", Constants.DATABASE_LOCATION);
+        logger = Logger.getLogger(Main.class);
+        
+        logger.info("System start");
         SystemBoot.getInstance();
-        new MainWindow();
-        for (User user : Runtime.getInstance().getUserlist()) {
-            for (Holiday holi : user.getHolidays()) {
-                System.out.println(holi.getStart());
-                System.out.println(holi.getEnd());
-                System.out.println(holi.getAmount());
-                System.out.println("-------------------------");
+        
+        // Main program
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("Select * from SYSTEMPREFERENCES");
+            
+            System.out.println("Begin Test");
+            while (rs.next()) {
+                System.out.println(rs.getInt("Syst_id"));
+                System.out.println(rs.getDate("SYST_LAST_LOGIN"));
             }
+            System.out.println("End Test");
         }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
     }
 }
