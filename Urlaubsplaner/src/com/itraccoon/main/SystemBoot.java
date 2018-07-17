@@ -136,8 +136,9 @@ public class SystemBoot {
     
     private void setLookAndFeel() {
         logger.info("Setting up look and feel.");
+        
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
         }
         catch (ClassNotFoundException e) {
             logger.warn("Look and feel yesn't be set", e);
