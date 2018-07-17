@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import com.itraccoon.constants.Constants;
 import com.itraccoon.gui.MainWindow;
+import com.itraccoon.test.TesterClass;
 
 public class Main {
     
@@ -22,7 +23,7 @@ public class Main {
         
         // Main program
         new MainWindow();
-        // TesterClass.printAllLogins();
+        TesterClass.printAllLogins();
         
     }
     
