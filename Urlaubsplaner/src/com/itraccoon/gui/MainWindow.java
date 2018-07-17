@@ -157,7 +157,7 @@ public class MainWindow {
             txtKalenderbersicht = new JTextField();
             txtKalenderbersicht.setFont(new Font("Dialog", Font.BOLD, 99));
             txtKalenderbersicht.setText("Kalender\u00DCbersicht");
-            txtKalenderbersicht.setBounds(67, 629, 1114, 266);
+            txtKalenderbersicht.setBounds(239, 281, 1114, 266);
             txtKalenderbersicht.setColumns(10);
         }
         return txtKalenderbersicht;
