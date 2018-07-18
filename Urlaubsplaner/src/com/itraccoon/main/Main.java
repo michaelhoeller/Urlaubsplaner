@@ -6,15 +6,13 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 
 import com.itraccoon.constants.Constants;
-import com.itraccoon.management.SystemPreferencesManagement;
-import com.itraccoon.util.Utils;
 
 public class Main {
 
 	static Logger logger;
 
 	public static void main(String[] args) throws SQLException, IOException {
-		Utils.deleteFileStructure();
+		// Utils.deleteFileStructure();
 
 		System.setProperty("logfileLocation", Constants.LOGFILE_LOCATION);
 		System.setProperty("derby.system.home", Constants.DATABASE_LOCATION);
@@ -28,16 +26,18 @@ public class Main {
 		// new MainWindow();
 		// TesterClass.printAllLogins();
 
-		System.out.println(SystemPreferencesManagement.getBeroHigh());
-		System.out.println(SystemPreferencesManagement.getBeroMid());
-		System.out.println(SystemPreferencesManagement.getBeroLow());
-		System.out.println("Setting new Values. Print out next");
-		SystemPreferencesManagement.setBeroHigh("New High Value");
-		SystemPreferencesManagement.setBeroMid("New Bero mid");
-		SystemPreferencesManagement.setBeroLow("New Bero low");
-		System.out.println(SystemPreferencesManagement.getBeroHigh());
-		System.out.println(SystemPreferencesManagement.getBeroMid());
-		System.out.println(SystemPreferencesManagement.getBeroLow());
+		// HashMap<Integer, String> test = UserRoleManagement.getAllUserroles();
+		//
+		// System.out.println(test.toString());
+		//
+		// UserRoleManagement.insertIntoUserRole("New Role");
+		// UserRoleManagement.insertIntoUserRole("Second new Role123123\\\\");
+		// UserRoleManagement.updateUserRole(1, "Nix Arzt mehr");
+		//
+		// HashMap<Integer, String> test2 = UserRoleManagement.getAllUserroles();
+		// test2 = UserRoleManagement.getAllUserroles();
+		// System.out.println(test2.toString());
+		logger.info("End of programm");
 	}
 
 }
