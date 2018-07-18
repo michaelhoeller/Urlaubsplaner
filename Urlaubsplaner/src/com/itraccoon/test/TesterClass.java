@@ -19,13 +19,13 @@ public class TesterClass {
 		Connection conn = ConnectionManager.getInstance().getConnection();
 		try {
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("Select * from SYSTEMPREFERENCES");
+			ResultSet rs = stmt.executeQuery("Select * from LOGIN");
 
 			logger.info("---------------------------------------------");
 			logger.info("Begin Test");
 			while (rs.next()) {
-				logger.info("Eintrag with id: " + rs.getInt("Syst_id"));
-				logger.info("Respective timestamp: " + rs.getTimestamp("SYST_LAST_LOGIN"));
+				logger.info("Eintrag with id: " + rs.getInt("logi_id"));
+				logger.info("Respective timestamp: " + rs.getTimestamp("logi_LAST_LOGIN"));
 				logger.info("Conversion to String test: " + new FDate(rs.getTimestamp(2)).getDateAsString());
 				logger.info("------------------");
 			}

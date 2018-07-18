@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 import com.itraccoon.constants.Constants;
 import com.itraccoon.database.ConnectionManager;
 import com.itraccoon.database.DatabankCreation;
-import com.itraccoon.database.device.SystemDevice;
+import com.itraccoon.database.device.LoginDevice;
 
 public class SystemBoot {
     
@@ -122,7 +122,7 @@ public class SystemBoot {
         Connection conn = ConnectionManager.getInstance().getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt = conn.prepareStatement(SystemDevice.getInsertLogin());
+            stmt = conn.prepareStatement(LoginDevice.getInsertLogin());
             stmt.execute();
             conn.commit();
         }
