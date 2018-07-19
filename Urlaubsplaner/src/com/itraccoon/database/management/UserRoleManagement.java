@@ -1,4 +1,4 @@
-package com.itraccoon.management;
+package com.itraccoon.database.management;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

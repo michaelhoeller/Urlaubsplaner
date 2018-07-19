@@ -127,7 +127,7 @@ public class MainWindow {
     
     void populateTabel(DefaultTableModel model) {
         for (User user : Runtime.getInstance().getUserlist()) {
-            model.addRow(new Object[] { user.getId(), user.getFullName(), user.getDaysAvailable(), user.getDaysSpent(),
+            model.addRow(new Object[] { user.getId(), user.getName(), user.getDaysRemaining(), user.getDaysSpent(),
                     user.getDaysRemaining() });
         }
     }
