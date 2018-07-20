@@ -25,6 +25,14 @@ public class User {
         this.daysRemaining = daysAvailable;
     }
     
+    public User(String name, Integer daysSpent, Integer daysRemaining, Integer daysPerYear, Integer userRole) {
+        this.name = name;
+        this.daysSpent = daysSpent;
+        this.daysRemaining = daysRemaining;
+        this.daysPerYear = daysPerYear;
+        this.userRole = userRole;
+    }
+    
     public Integer getId() {
         return id;
     }

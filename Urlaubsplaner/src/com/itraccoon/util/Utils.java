@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 
@@ -40,6 +41,16 @@ public class Utils {
             }
         }
         return highestId;
+    }
+    
+    // Get Key from Value
+    public static Integer getKeyFromValue(Map<Integer, String> hm, Object value) {
+        for (Integer o : hm.keySet()) {
+            if (hm.get(o).equals(value)) {
+                return o;
+            }
+        }
+        return null;
     }
     
     // Local Date to Date
