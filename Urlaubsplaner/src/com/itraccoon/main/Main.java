@@ -1,5 +1,7 @@
 package com.itraccoon.main;
 
+import java.io.IOException;
+
 import org.apache.log4j.Logger;
 
 import com.itraccoon.constants.Constants;
@@ -9,7 +11,7 @@ public class Main {
 
 	static Logger logger;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// Utils.deleteFileStructure();
 
 		System.setProperty("logfileLocation", Constants.LOGFILE_LOCATION);
@@ -18,6 +20,7 @@ public class Main {
 		logger = Logger.getLogger(Main.class);
 
 		logger.info("Start of program");
+
 		SystemBoot.getInstance();
 
 		// Main program

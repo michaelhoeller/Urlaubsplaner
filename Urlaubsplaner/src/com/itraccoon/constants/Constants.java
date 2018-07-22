@@ -11,6 +11,8 @@ public class Constants {
 	public static final String SYS_TEMPDIR = System.getProperty("java.io.tmpdir");
 	public static final String DATABASE_HOME = System.getProperty("derby.system.home");
 
+	public static final String SYSTEMLOCK = Constants.SYS_TEMPDIR + Constants.SEPARATOR + "SystemLock";
+
 	// Toolkit
 	public static final Integer SCREENWIDTH = ((Double) Toolkit.getDefaultToolkit().getScreenSize().getWidth()).intValue();
 	public static final Integer SCREENHEIGHT = ((Double) Toolkit.getDefaultToolkit().getScreenSize().getHeight()).intValue();

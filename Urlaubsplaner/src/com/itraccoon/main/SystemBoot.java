@@ -1,6 +1,7 @@
 package com.itraccoon.main;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,12 +13,14 @@ import java.util.List;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
 import com.itraccoon.constants.Constants;
 import com.itraccoon.database.ConnectionManager;
 import com.itraccoon.database.DatabankCreation;
 import com.itraccoon.database.device.LoginDevice;
+import com.itraccoon.gui.dialogue.MessageDialogue;
 
 public class SystemBoot {
 
@@ -32,6 +35,7 @@ public class SystemBoot {
 
 	private SystemBoot() {
 		logger.info("Preparing SystemBoot");
+		checkForRunningLock();
 		checkFileStruckture();
 		checkForDatabank();
 		if (!databaseExists) {
@@ -47,6 +51,24 @@ public class SystemBoot {
 		// Last action
 		systemBootComplete = true;
 		logger.info("SystemBoot completed successfully");
+	}
+
+	private void checkForRunningLock() {
+		File f = new File(Constants.SYSTEMLOCK);
+		if (f.exists()) {
+			logger.error("An instance is already running");
+			new MessageDialogue("An instance of this program is already running", "Error");
+			System.exit(0);
+		} else {
+			try {
+				f.createNewFile();
+				FileUtils.forceDeleteOnExit(f);
+			} catch (IOException e) {
+				logger.error("Could not create instance lock. System exit", e);
+				System.exit(0);
+			}
+			logger.info("Instance running lock set");
+		}
 	}
 
 	public static SystemBoot getInstance() {
