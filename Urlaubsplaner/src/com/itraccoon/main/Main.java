@@ -14,7 +14,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         // Utils.deleteFileStructure();
         
-        System.out.println(Constants.SYSTEMLOCK);
         System.setProperty("logfileLocation", Constants.LOGFILE_LOCATION);
         System.setProperty("derby.system.home", Constants.DATABASE_LOCATION);
         

@@ -35,7 +35,7 @@ public class SystemBoot {
     private SystemBoot() {
         logger.info("Preparing SystemBoot");
         
-        // checkForRunningLock();
+        checkForRunningLock();
         
         checkFileStruckture();
         checkForDatabank();
