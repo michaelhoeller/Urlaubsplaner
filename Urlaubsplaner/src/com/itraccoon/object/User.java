@@ -10,22 +10,22 @@ public class User {
     
     private Integer id;
     private String  name;
-    private Integer daysSpent;
-    private Integer daysRemaining;
-    private Integer daysPerYear;
+    private Float   daysSpent;
+    private Float   daysRemaining;
+    private Float   daysPerYear;
     private Integer userRole;
     
     public User() {
     }
     
-    public User(String name, Integer daysAvailable, Integer daysPerYear) {
+    public User(String name, Float daysAvailable, Float daysPerYear) {
         this.name = name;
         this.daysPerYear = daysPerYear;
-        this.daysSpent = 0;
+        this.daysSpent = (float) 0;
         this.daysRemaining = daysAvailable;
     }
     
-    public User(String name, Integer daysSpent, Integer daysRemaining, Integer daysPerYear, Integer userRole) {
+    public User(String name, Float daysSpent, Float daysRemaining, Float daysPerYear, Integer userRole) {
         this.name = name;
         this.daysSpent = daysSpent;
         this.daysRemaining = daysRemaining;
@@ -49,27 +49,27 @@ public class User {
         this.name = name;
     }
     
-    public Integer getDaysSpent() {
+    public Float getDaysSpent() {
         return daysSpent;
     }
     
-    public void setDaysSpent(Integer daysSpent) {
+    public void setDaysSpent(Float daysSpent) {
         this.daysSpent = daysSpent;
     }
     
-    public Integer getDaysRemaining() {
+    public Float getDaysRemaining() {
         return daysRemaining;
     }
     
-    public void setDaysRemaining(Integer daysRemaining) {
+    public void setDaysRemaining(Float daysRemaining) {
         this.daysRemaining = daysRemaining;
     }
     
-    public Integer getDaysPerYear() {
+    public Float getDaysPerYear() {
         return daysPerYear;
     }
     
-    public void setDaysPerYear(Integer daysPerYear) {
+    public void setDaysPerYear(Float daysPerYear) {
         this.daysPerYear = daysPerYear;
     }
     

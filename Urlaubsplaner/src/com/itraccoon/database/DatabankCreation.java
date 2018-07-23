@@ -9,6 +9,7 @@ import java.sql.Statement;
 import org.apache.log4j.Logger;
 
 import com.itraccoon.constants.Constants;
+import com.itraccoon.database.device.AbsenceTypeDevice;
 import com.itraccoon.database.device.CreationDevice;
 import com.itraccoon.database.device.UserRoleDevice;
 import com.itraccoon.gui.dialogue.MessageDialogue;
@@ -24,6 +25,8 @@ public class DatabankCreation {
             logger.info("Tables successfully created");
             initUsros();
             logger.info("Default user roles successfully created");
+            initAbtys();
+            logger.info("Default absence types successfully created");
         }
         catch (SQLException e) {
             new MessageDialogue("Fatal error during databank creation. Please seek immediate shelter!\nAlso: Please check the logfile", "Fatal Error");
@@ -39,6 +42,7 @@ public class DatabankCreation {
             stmt = conn.createStatement();
             stmt.execute(CreationDevice.getCreateBeroTable());
             stmt.execute(CreationDevice.getCreateUserTable());
+            stmt.execute(CreationDevice.getCreateAbsenceTypeTable());
             stmt.execute(CreationDevice.getCreateHolidayTable());
             stmt.execute(CreationDevice.getCreateAbsenceTable());
             stmt.execute(CreationDevice.getCreateLoginTable());
@@ -59,9 +63,6 @@ public class DatabankCreation {
         try {
             stmt = conn.prepareStatement(UserRoleDevice.getInsertIntoUserRole());
             
-            stmt.setString(1, Constants.DEFAULT_ROLE);
-            stmt.execute();
-            
             stmt.setString(1, Constants.DEFAULT_ROLE_1);
             stmt.execute();
             
@@ -69,6 +70,9 @@ public class DatabankCreation {
             stmt.execute();
             
             stmt.setString(1, Constants.DEFAULT_ROLE_3);
+            stmt.execute();
+            
+            stmt.setString(1, Constants.DEFAULT_ROLE);
             stmt.execute();
             
             conn.commit();
@@ -79,5 +83,32 @@ public class DatabankCreation {
         finally {
             ConnectionManager.close(null, stmt, conn);
         }
+    }
+    
+    private void initAbtys() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = conn.prepareStatement(AbsenceTypeDevice.getInsertIntoAbsenceType());
+            
+            stmt.setString(1, Constants.DEFAULT_ABTY_1);
+            stmt.execute();
+            
+            stmt.setString(1, Constants.DEFAULT_ABTY_2);
+            stmt.execute();
+            
+            stmt.setString(1, Constants.DEFAULT_ABTY_3);
+            stmt.execute();
+            
+            conn.commit();
+        }
+        catch (SQLException e) {
+            logger.error("Error during inital absence type creation", e);
+        }
+        finally {
+            ConnectionManager.close(null, stmt, conn);
+        }
+        
     }
 }

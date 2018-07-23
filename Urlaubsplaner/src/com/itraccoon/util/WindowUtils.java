@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import com.itraccoon.constants.Constants;
 import com.itraccoon.database.Shut;
 import com.itraccoon.gui.dialogue.ClosingDialogue;
+import com.itraccoon.gui.dialogue.QuestionDialogue;
 
 public class WindowUtils {
     
@@ -24,7 +25,7 @@ public class WindowUtils {
      * @param ableToShutdown
      *            true when the x button is allowed to shutdown the program
      */
-    public static void setWindowProperties(JFrame frame, String title, Integer size, boolean ableToShutdown) {
+    public static void setWindowProperties(JFrame frame, String title, Integer size, boolean ableToShutdown, JFrame parentFrame) {
         
         if (size == frameSize.FULL_SCREEN.size()) {
             frame.setSize((Constants.SCREENWIDTH / size) - 50, (Constants.SCREENHEIGHT / size) - 50);
@@ -46,6 +47,22 @@ public class WindowUtils {
                 }
             });
         }
+        else {
+            frame.addWindowListener(new WindowAdapter() {
+                
+                public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                    if (new QuestionDialogue("Back", "Back without saving?").getAnswer() == true) {
+                        parentFrame.setEnabled(true);
+                        frame.dispose();
+                    }
+                }
+            });
+        }
+    }
+    
+    public static void backToParrentWindow(JFrame frame, JFrame parentFrame) {
+        parentFrame.setEnabled(true);
+        frame.dispose();
     }
     
 }
