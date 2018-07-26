@@ -63,4 +63,13 @@ public class CreationDevice {
         return statement;
     }
     
+    public static String getCreateSystemValueTable() {
+        String statement = "CREATE TABLE SYSTEM_VALUES("
+            + "SYSV_ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
+            + "SYSV_VERSION INTEGER,"
+            + "SYSV_MAN_ID INTEGER,"
+            + "PRIMARY KEY (SYSV_ID))";
+        return statement;
+    }
+    
 }

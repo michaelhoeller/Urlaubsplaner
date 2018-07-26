@@ -27,6 +27,7 @@ public class DatabankCreation {
             logger.info("Default user roles successfully created");
             initAbtys();
             logger.info("Default absence types successfully created");
+            initSystemVersion();
         }
         catch (SQLException e) {
             new MessageDialogue("Fatal error during databank creation. Please seek immediate shelter!\nAlso: Please check the logfile", "Fatal Error");
@@ -46,6 +47,7 @@ public class DatabankCreation {
             stmt.execute(CreationDevice.getCreateHolidayTable());
             stmt.execute(CreationDevice.getCreateAbsenceTable());
             stmt.execute(CreationDevice.getCreateLoginTable());
+            stmt.execute(CreationDevice.getCreateSystemValueTable());
             conn.commit();
         }
         catch (SQLException e) {
@@ -109,6 +111,10 @@ public class DatabankCreation {
         finally {
             ConnectionManager.close(null, stmt, conn);
         }
+        
+    }
+    
+    private void initSystemVersion() {
         
     }
 }

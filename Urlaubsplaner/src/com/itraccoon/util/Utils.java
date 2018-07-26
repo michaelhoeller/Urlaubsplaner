@@ -5,7 +5,6 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -14,9 +13,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
-
-import com.itraccoon.constants.Constants;
 import com.itraccoon.gui.dialogue.MessageDialogue;
 import com.itraccoon.main.Runtime;
 import com.itraccoon.object.Holiday;
@@ -68,15 +64,6 @@ public class Utils {
     // Local Date to Date
     public static Date localToDate(LocalDate ld) {
         return Date.from(ld.atStartOfDay(ZoneId.systemDefault()).toInstant());
-    }
-    
-    public static void deleteFileStructure() {
-        try {
-            FileUtils.deleteDirectory(new File(Constants.MAINFOLDER));
-        }
-        catch (IOException e) {
-            System.out.println("Couldn't delete main folder");
-        }
     }
     
     // Calculate Holiday length
